@@ -10,6 +10,11 @@ import { getStoryblokApi, contentVersion } from "@/lib/storyblok";
 import { renderRichText } from "@storyblok/react/rsc";
 import "./globals.scss";
 
+// The root layout fetches Storyblok config (header, popup) at request time,
+// so every route — including the auto-generated 404 page — renders
+// dynamically instead of being prerendered at build time.
+export const instant = false;
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
