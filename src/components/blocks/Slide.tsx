@@ -1,7 +1,12 @@
 import { storyblokEditable, type SbBlokData } from "@storyblok/react/rsc";
 import { parseStyle } from "@/utils/styleParser";
 
-type Asset = { filename?: string } | string;
+type Asset = {
+  filename?: string;
+  alt?: string;
+  description?: string;
+  name?: string;
+} | string;
 
 type SlideBlok = SbBlokData & {
   // Card wrapper
