@@ -1,0 +1,25 @@
+<svg width="66" height="60" viewBox="0 0 66 60" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_70_7808)">
+<use xlink:href="#stroke0_70_7808" fill="#BE8E66"/>
+<mask id="stroke1_70_7808" fill="white">
+<use xlink:href="#stroke0_70_7808"/>
+</mask>
+<path d="M35.5157 39.6827C35.5157 29.9205 27.5702 22.0156 17.7578 22.0156C7.9455 22.0156 0 29.9205 0 39.6827C0 49.4448 7.9455 57.3497 17.7578 57.3497C27.5702 57.3497 35.5157 49.4448 35.5157 39.6827Z" stroke-width="6" stroke="#583617" mask="url(#stroke1_70_7808)"/>
+<use xlink:href="#stroke2_70_7808" fill="#BE8E66"/>
+<mask id="stroke3_70_7808" fill="white">
+<use xlink:href="#stroke2_70_7808"/>
+</mask>
+<path d="M55.9372 50.2833C55.9372 44.9152 51.566 40.5664 46.1704 40.5664C40.7747 40.5664 36.4036 44.9152 36.4036 50.2833C36.4036 55.6513 40.7747 60.0002 46.1704 60.0002C51.566 60.0002 55.9372 55.6513 55.9372 50.2833Z" stroke-width="6" stroke="#583617" mask="url(#stroke3_70_7808)"/>
+<path d="M53.4443 30.6227L64.2925 26.6929" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#583617"/>
+<path d="M43.6888 17.973L50.3139 8.57324" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#583617"/>
+<path d="M28.4125 13.1823V1.69873" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#583617"/>
+<path d="M13.1363 17.973L6.51123 8.57324" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#583617"/>
+</g>
+<defs>
+<clipPath id="clip0_70_7808">
+<rect width="66" height="60" fill="white"/>
+</clipPath>
+<path id="stroke0_70_7808" d="M35.5157 39.6827C35.5157 29.9205 27.5702 22.0156 17.7578 22.0156C7.9455 22.0156 0 29.9205 0 39.6827C0 49.4448 7.9455 57.3497 17.7578 57.3497C27.5702 57.3497 35.5157 49.4448 35.5157 39.6827Z" fill-rule="evenodd" clip-rule="evenodd"/>
+<path id="stroke2_70_7808" d="M55.9372 50.2833C55.9372 44.9152 51.566 40.5664 46.1704 40.5664C40.7747 40.5664 36.4036 44.9152 36.4036 50.2833C36.4036 55.6513 40.7747 60.0002 46.1704 60.0002C51.566 60.0002 55.9372 55.6513 55.9372 50.2833Z" fill-rule="evenodd" clip-rule="evenodd"/>
+</defs>
+</svg>

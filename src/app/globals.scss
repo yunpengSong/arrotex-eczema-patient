@@ -1,0 +1,909 @@
+@use "sass:math";
+@use "tailwindcss";
+@use "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "new-hero", Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "new-hero", Arial, Helvetica, sans-serif;
+}
+
+.bg-deep-blue{ background: #DCE3EA !important; }
+.bg-white{ background-color: #fff !important; }
+.bg-grey{ background-color: #f1f1f1 !important; }
+.bg-light-grey{ background-color: #E6E7E8 !important; }
+.bg-blue{background-color: #0076BE !important;}
+.bg-sky-blue{background-color: #52B9E9 !important;}
+.bg-deep-grey{background-color: #50535A !important;}
+.bg-purple{background-color: #7F58A5 !important;}
+.bg-orange{background-color: #F68D76 !important;}
+.bg-green{background-color: #23AE49 !important;}
+
+ol, ul, menu {
+  list-style: initial;
+  padding-left: 20px;
+}
+
+.title {
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: 700;
+}
+.sub-title {
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 700;
+}
+.text {
+  color: #000;
+  font-family: "new-hero", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+}
+.references {
+  color: #000;
+  font-family: "new-hero", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20vh);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out,
+  visibility 1200ms ease-out;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.collapse {
+  visibility: initial;
+}
+
+.card-box{
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-outline-primary {
+    border-radius: 200px;
+    background: #1F5F5B;
+    display: flex;
+    width: 123px;
+    height: 40px;
+    flex-direction: column;
+    justify-content: center;
+    color: #FFF;
+    text-align: center;
+    font-family: "new-hero", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border: 1px solid #1F5F5B;
+    &:hover{
+      border-color: #1F5F5B;
+      color: #1F5F5B;
+      background-color: transparent;
+    }
+}
+
+// Unified circular arrow button (teal circle, white arrow). Works as a link
+// (<a>) or a button.
+.arrow-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #1F5F5B;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+
+  svg{
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover{
+    background: #164945;
+    color: #fff;
+  }
+}
+
+// White pill "Learn more" button with the circular arrow inside; reuse
+// .arrow-btn for the circle at a smaller size
+.learn-more-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px 12px 28px;
+  background: #fff;
+  border-radius: 10px;
+  color: #1F5F5B;
+  text-align: center;
+  font-family: "new-hero", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  cursor: pointer;
+
+  .arrow-btn{
+    width: 36px;
+    height: 36px;
+
+    svg{
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &:hover{
+    color: #164945;
+    text-decoration: none;
+  }
+}
+
+.navbar{
+  .navbar-nav{
+    .nav-item{
+      .nav-link{
+        color: #1F5F5B;
+        text-align: center;
+        font-family: "new-hero", sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 0px 1rem;
+        // Vertical separator between nav items; color follows the text color
+        border-right: 1px solid currentColor;
+        // A hidden bold copy of the label reserves the bold text width, so
+        // toggling to weight 600 on hover/active never shifts the neighbours
+        &::after{
+          content: attr(data-label);
+          display: block;
+          height: 0;
+          overflow: hidden;
+          visibility: hidden;
+          font-weight: 600;
+        }
+        &:hover{
+          font-weight: 600;
+        }
+        &.active{
+          font-weight: 600;
+        }
+      }
+      // No separator on the last item
+      &:last-child .nav-link{
+        border-right: none;
+      }
+    }
+  }
+}
+
+.footer{
+  .footer-bottom-text{
+    color: #000;
+    font-family: "new-hero";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .footer-link{
+    a{
+      color: #1F5F5B;
+      font-family: "new-hero";
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-decoration: underline;
+    }
+
+    // "|" separator between links, same style as the link text
+    a:not(:last-child)::after{
+      content: "|";
+      color: #1F5F5B;
+      font-family: "new-hero";
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+  }
+}
+
+.little-text{
+  color: #000;
+  font-family: "new-hero"; 
+  font-size: 12px; 
+  font-style: normal; 
+  font-weight: 400; 
+  line-height: normal;
+}
+// Anchor banner content to the bottom of the banner.
+// The banner keeps its min-height (set in Storyblok); when the content
+// grows taller than it, the banner expands, so this stays responsive.
+.banner{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.banner{
+  border-radius: .25rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+// ---------------------------------------------------------------------------
+// Split section: a two-column layout (text + media, media + text, or text +
+// text) composed in Storyblok from container/row/colx + text/image bloks.
+//
+// Recipe (Storyblok):
+//   container  class: "container container-fluid px-0"  <- full-bleed section
+//     row       class: "split g-0"                     <- cols side by side
+//       colx    class: "split-body", colnum: 6         <- text column
+//         text bloks...
+//       colx    class: "split-media", colnum: 6        <- media column
+//         image blok (class: "split-media-img", optional)
+//
+// - The body column stretches to the media height; its content is vertically
+//   centered against the image.
+// - The body's inner padding matches the standard .container edge, so text
+//   stays aligned with the rest of the page (the green line in the design).
+// - Column ratio is controlled by colnum (e.g. 5/7) or a width utility class
+//   on the colx (.col-w-40 ... .col-w-70).
+// - From 768px up the columns stay side by side; below 768px (phones) they
+//   stack vertically, the text stays aligned with the standard container
+//   edge and the image keeps its aspect ratio.
+// ---------------------------------------------------------------------------
+
+// The Storyblok container blok always renders "container <class>"; combining
+// it with container-fluid must win over .container's max-width so the
+// section can span the full page width.
+.container.container-fluid{
+  max-width: 100%;
+}
+
+.split{
+  align-items: stretch;
+}
+
+// Distance from the section edge to the standard .container content edge,
+// shared by the split column variants. 100% tracks the real section width
+// (viewport minus scrollbar), so this stays exact at every Bootstrap
+// breakpoint (container widths: 540/720/960/1140/1320).
+@mixin split-inset{
+  --split-inset: 0.75rem;
+  @media (min-width: 576px){
+    --split-inset: calc((100% - 540px) / 2 + 0.75rem);
+  }
+  @media (min-width: 768px){
+    --split-inset: calc((100% - 720px) / 2 + 0.75rem);
+  }
+  @media (min-width: 992px){
+    --split-inset: calc((100% - 960px) / 2 + 0.75rem);
+  }
+  @media (min-width: 1200px){
+    --split-inset: calc((100% - 1140px) / 2 + 0.75rem);
+  }
+  @media (min-width: 1400px){
+    --split-inset: calc((100% - 1320px) / 2 + 0.75rem);
+  }
+}
+
+.split-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include split-inset;
+  padding-left: var(--split-inset);
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+// Text-only column inside a split row (e.g. a colored panel). Unlike
+// .split-body, the text is inset from the panel's edges instead of aligning
+// to the page container edge. Declared before the media queries below so
+// their overrides win the cascade.
+.split-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include split-inset;
+  padding: 2.5rem 3rem;
+}
+
+// When a text panel sits at an outer edge of the row (first or last
+// column), the text on that side aligns with the standard .container
+// content edge, like the rest of the page text.
+.row.split > .split-text:first-child{
+  padding-left: var(--split-inset);
+}
+
+.row.split > .split-text:last-child{
+  padding-right: var(--split-inset);
+}
+
+.split-media{
+  padding-left: 0;
+  padding-right: 0;
+
+  // Image blok wrapper (div) or linked image (a)
+  > div,
+  > a{
+    height: 100%;
+  }
+
+  img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// colx renders col-lg-N, which only takes effect at 992px+. Force the
+// split columns to keep their colnum ratio from 768px (tablet/desktop) so
+// the section stays side by side well below the lg breakpoint.
+@media (min-width: 768px) and (max-width: 991.98px) {
+  @for $n from 1 through 12 {
+    .row.split > .col-lg-#{$n}{
+      flex: none;
+      width: math.div($n * 100%, 12);
+    }
+  }
+}
+
+// Optional fixed column widths when colnum is not enough
+@for $w from 3 through 8 {
+  .col-w-#{$w * 10}{
+    width: $w * 10%;
+    flex: none;
+  }
+}
+
+// Phones/tablet (<768px): stack vertically. The text keeps the same
+// --split-inset used in the side-by-side layout, so its edges align exactly
+// with the standard .container content (banner text etc.). The image spans
+// the full width and keeps its aspect ratio.
+@media (max-width: 767.98px) {
+  .split-body{
+    padding-right: var(--split-inset);
+  }
+
+  // Stacked panels align with the standard container edge on both sides
+  .split-text{
+    padding-left: var(--split-inset);
+    padding-right: var(--split-inset);
+  }
+
+  .split-media img{
+    height: auto;
+  }
+}
+
+// Title blok: icon + heading text, as used at the top of card sections.
+// The text style can be overridden per blok through the Storyblok style
+// field (applied inline to the span).
+.section-title{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  img{
+    width: 44px;
+    height: 46px;
+    flex-shrink: 0;
+  }
+
+  .section-title-text{
+    color: #1F5F5B;
+    font-family: "new-hero", sans-serif;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
+
+// Card blok: image on top, then a row with text (left) and a round button
+// (right). Every part accepts its own class/style from Storyblok, and the
+// card wrapper has class/style too.
+.card-item{
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+
+  .card-item-img{
+    display: block;
+    width: 100%;
+    // height: 220px;
+    object-fit: cover;
+  }
+
+  .card-item-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .card-item-text{
+    color: #1F5F5B;
+    font-family: "new-hero", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .card-item-btn{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1F5F5B;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-decoration: none;
+
+    img{
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+// Icon + text item (icon_item blok): a circular base (background set
+// through the backgroundStyle field) with the icon image centered inside,
+// text on the right. Place inside row/colx columns to build a grid; sizes
+// and colors can be overridden per blok through the class/style fields.
+.icon-item{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  .icon-item-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6D3B7;
+    width: 116px;
+    height: 116px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .icon-item-img{
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .icon-item-text{
+    color: #000;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+// Accordion blok: collapsible section with a title row and a chevron,
+// built on native <details>/<summary>. The expanded area renders nested
+// bloks; title style can be overridden per blok through titleClass/titleStyle.
+.accordion{
+  border-bottom: 1px solid var(--gray-200, #D4DBDE);
+
+  > summary{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker{
+      display: none;
+    }
+  }
+
+  .accordion-title{
+    color: #583617;
+    font-family: "new-hero", sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .accordion-chevron{
+    flex-shrink: 0;
+    color: #583617;
+    transition: transform .2s ease;
+  }
+
+  &[open] .accordion-chevron{
+    transform: rotate(180deg);
+  }
+
+  .accordion-content{
+    padding-bottom: 2rem;
+  }
+}
+
+// Carousel blok: the peach panel belongs to the carousel itself; slides
+// inside are transparent. Scroll-snap track flanked by prev/next arrows,
+// pagination dots centered underneath (both inside the panel).
+.carousel{
+  background: rgba(246, 211, 183, 0.35);
+  border-radius: 10px;
+  padding: 30px;
+
+  .carousel-view{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .carousel-track{
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar{
+      display: none;
+    }
+
+    // Each slide takes the full track width and snaps into place
+    > *{
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+  }
+
+  .carousel-arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: #583617;
+    cursor: pointer;
+    padding: 0;
+
+    svg{
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .carousel-dots{
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    margin-top: .75rem;
+  }
+
+  // Inactive dots are outlined, the active one is filled; both at 80%
+  .carousel-dot{
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid #583617;
+    background: transparent;
+    opacity: .8;
+    cursor: pointer;
+
+    &.active{
+      background: #583617;
+    }
+  }
+}
+
+// Slide blok (carousel item): round avatar on the left, title + text on
+// the right. The panel background lives on the carousel wrapper, so the
+// slide itself stays transparent.
+.slide-card{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  .slide-card-avatar{
+    width: 164px;
+    height: 164px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .slide-card-title{
+    color: #583617;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 40px;
+  }
+
+  .slide-card-text{
+    color: #000;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+  }
+}
+
+// "For HCPs" leaving-site popup. Triggered from the header; all text
+// content is configured through fields on the header blok.
+.hcp-popup-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: rgba(0, 0, 0, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.hcp-popup{
+  border-radius: 12px;
+  // White base with a 10% teal tint layered on top, as in the design
+  background: linear-gradient(rgba(31, 95, 91, 0.10), rgba(31, 95, 91, 0.10)), #fff;
+  max-width: 660px;
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  padding: 2rem 2.25rem;
+}
+
+.hcp-popup-title{
+  color: #1F5F5B;
+  font-family: "new-hero", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 1.25rem;
+}
+
+.hcp-popup-text{
+  color: #1a1a1a;
+  font-family: "new-hero", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.45;
+
+  p{
+    margin-bottom: .75rem;
+  }
+
+  a{
+    color: #1F5F5B;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  strong{
+    font-weight: 700;
+  }
+}
+
+.hcp-popup-actions{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.hcp-popup-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  background: #fff;
+  color: #1F5F5B;
+  font-family: "new-hero", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+  border-radius: 8px;
+  padding: .5rem 1.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+}
+
+.hcp-popup-btn-icon{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1F5F5B;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg{
+    width: 14px;
+    height: 14px;
+  }
+
+  path{
+    stroke: #fff;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// "Body areas" infographic (built from a text blok with raw HTML): two
+// cards with a brown title bar, a figure image (exported from Figma,
+// callout boxes and connector lines included) and a brown note bar below.
+.body-areas{
+  sup{
+    font-size: .6em;
+  }
+
+  .body-areas-row{
+    display: flex;
+    gap: 24px;
+
+    // Stack the two cards on phones
+    @media (max-width: 767.98px){
+      flex-direction: column;
+    }
+  }
+
+  .body-areas-card{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E6E7E8;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .body-areas-title{
+    background: #583617;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 16px;
+    color: #fff;
+    text-align: center;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .body-areas-figure{
+    // Fills the remaining card height, so a shorter figure (children) is
+    // centered vertically against the taller one
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+
+    img{
+      display: block;
+      width: 100%;
+      max-width: 562px;
+      height: auto;
+    }
+  }
+
+  .body-areas-note{
+    background: #B97C51;
+    border-radius: 0 0 10px 10px;
+    padding: 14px 40px;
+    color: #fff;
+    text-align: center;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100.085%;
+  }
+}
+
+// Small source caption under the infographic
+.body-areas-caption{
+  margin: 12px 0 0;
+  font-family: "new-hero", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+
+  sup{
+    font-size: .6em;
+  }
+}
