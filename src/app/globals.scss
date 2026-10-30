@@ -571,6 +571,71 @@ ul {
   }
 }
 
+// Column table (table_columns + table_column): a peach header band with one
+// title per column, then a circular icon and description text per column.
+// Colors and sizes can be overridden per blok through the class/style fields.
+.table-columns{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  border-radius: 10px;
+  padding: 25px 30px 40px;
+  // Peach band at the top fading into white behind the icons and text
+  background: linear-gradient(180deg, #F1D5BC 0%, #F9EFE7 45%, #fff 60%);
+
+  @media (max-width: 991.98px){
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 767.98px){
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.table-column{
+  display: flex;
+  flex-direction: column;
+
+  .table-column-title{
+    color: #583617;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    // Keep every title on one visual line so the header band reads as a row
+    min-height: 2em;
+  }
+
+  .table-column-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 112px;
+    height: 112px;
+    margin: 24px 0 32px;
+    background: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img{
+      display: block;
+      max-width: 60%;
+      max-height: 60%;
+    }
+  }
+
+  .table-column-text{
+    color: #000;
+    font-family: "new-hero", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+}
+
 // Accordion blok: collapsible section with a title row and a chevron,
 // built on native <details>/<summary>. The expanded area renders nested
 // bloks; title style can be overridden per blok through titleClass/titleStyle.

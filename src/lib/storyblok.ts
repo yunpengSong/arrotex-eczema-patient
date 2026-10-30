@@ -10,6 +10,8 @@ import Section from "@/components/structure/Section";
 import Title from "@/components/blocks/Title";
 import Card from "@/components/blocks/Card";
 import IconItem from "@/components/blocks/IconItem";
+import TableColumns from "@/components/blocks/TableColumns";
+import TableColumn from "@/components/blocks/TableColumn";
 import Accordion from "@/components/blocks/Accordion";
 import Carousel from "@/components/blocks/Carousel";
 import Slide from "@/components/blocks/Slide";
@@ -51,6 +53,8 @@ export const getStoryblokApi = storyblokInit({
     title: Title,
     card: Card,
     icon_item: IconItem,
+    table_columns: TableColumns,
+    table_column: TableColumn,
     accordion: Accordion,
     carousel: Carousel,
     slide: Slide,
