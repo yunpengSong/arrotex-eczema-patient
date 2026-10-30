@@ -573,15 +573,15 @@ ul {
 
 // Column table (table_columns + table_column): a peach header band with one
 // title per column, then a circular icon and description text per column.
-// Colors and sizes can be overridden per blok through the class/style fields.
+// The peach gradient lives on each column, so the band follows the column
+// tops (titles keep their background even when they wrap); the fixed px
+// stops keep the fade at the same height across columns. Colors and sizes
+// can be overridden per blok through the class/style fields.
 .table-columns{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
   border-radius: 10px;
-  padding: 25px 30px 40px;
-  // Peach band at the top fading into white behind the icons and text
-  background: linear-gradient(180deg, #F1D5BC 0%, #F9EFE7 45%, #fff 60%);
+  overflow: hidden;
 
   @media (max-width: 991.98px){
     grid-template-columns: repeat(2, 1fr);
@@ -589,13 +589,14 @@ ul {
 
   @media (max-width: 767.98px){
     grid-template-columns: 1fr;
-    gap: 32px;
   }
 }
 
 .table-column{
   display: flex;
   flex-direction: column;
+  padding: 25px 30px 40px;
+  background: linear-gradient(180deg, #F1D5BC 0px, #F9EFE7 260px, #fff 340px);
 
   .table-column-title{
     color: #583617;
