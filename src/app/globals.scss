@@ -580,11 +580,11 @@ ul {
 .table-columns{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-radius: 10px;
-  overflow: hidden;
 
+  // When the columns wrap (tablet/mobile), separate them into rounded cards
   @media (max-width: 991.98px){
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
   @media (max-width: 767.98px){
@@ -597,6 +597,27 @@ ul {
   flex-direction: column;
   padding: 25px 30px 40px;
   background: linear-gradient(180deg, #F1D5BC 0px, #F9EFE7 260px, #fff 340px);
+
+  // Desktop: the band runs edge to edge, so only the outer corners of each
+  // row are rounded (first column of a row: left side, last: right side)
+  @media (min-width: 992px){
+    border-radius: 0;
+
+    &:first-child,
+    &:nth-child(4n + 1){
+      border-radius: 10px 0 0 10px;
+    }
+
+    &:last-child,
+    &:nth-child(4n){
+      border-radius: 0 10px 10px 0;
+    }
+  }
+
+  // Wrapped layouts: every column is its own rounded card
+  @media (max-width: 991.98px){
+    border-radius: 10px;
+  }
 
   .table-column-title{
     color: #583617;
