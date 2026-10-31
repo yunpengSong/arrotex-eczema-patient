@@ -44,6 +44,11 @@ const assetAlt = (asset?: Asset): string => {
 // One column of the table: title, round icon and description text
 export default function TableColumn({ blok }: { blok: TableColumnBlok }) {
   const iconUrl = assetUrl(blok.icon);
+  // When the editor sets an explicit width/height on the image (iconStyle),
+  // the asset is the inner icon and the wrapper paints the white circle.
+  // Without an explicit size the asset is the full circular image and the
+  // wrapper must stay invisible.
+  const isFullCircle = !/\b(width|height)\s*:/.test(blok.iconStyle || "");
 
   return (
     <div
@@ -59,7 +64,9 @@ export default function TableColumn({ blok }: { blok: TableColumnBlok }) {
         />
       )}
       {iconUrl && (
-        <div className="table-column-icon">
+        <div
+          className={`table-column-icon${isFullCircle ? " table-column-icon--asset" : ""}`}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={iconUrl}

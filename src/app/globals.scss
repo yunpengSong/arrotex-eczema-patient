@@ -591,8 +591,12 @@ ul {
 }
 
 .table-column{
-  display: flex;
-  flex-direction: column;
+  // Each column shares the container's row tracks (subgrid) so the title,
+  // icon and text rows start at the same vertical position in every column,
+  // no matter how many lines a title wraps to.
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
   padding: 25px 30px 40px;
   background: linear-gradient(180deg, #F1D5BC 0px, #F9EFE7 260px, #fff 340px);
 
@@ -635,7 +639,7 @@ ul {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    // Keep every title on one visual line so the header band reads as a row
+    // Reserve two lines so short titles don't shrink the shared title row
     min-height: 2em;
   }
 
@@ -646,7 +650,14 @@ ul {
     width: 178px;
     height: 178px;
     margin: 24px 0 32px;
-    background: #fff;
+    // Default gradient border (Figma: dark brown fading to peach).
+    // border-image ignores border-radius, so paint the border with two
+    // background layers instead: white inside the padding box, gradient
+    // under the 1px border area.
+    border: 1px solid transparent;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(180deg, rgba(88, 54, 23, 1), rgba(246, 211, 183, 0.5)) border-box;
     border-radius: 50%;
     overflow: hidden;
 
@@ -654,6 +665,20 @@ ul {
       display: block;
       max-width: 60%;
       max-height: 60%;
+    }
+
+    // The asset is the full circular image (no explicit width/height):
+    // hide the painted circle and let the image fill the wrapper.
+    &.table-column-icon--asset{
+      background: none;
+      border: none;
+
+      img{
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+      }
     }
   }
 
@@ -1013,5 +1038,121 @@ ul {
 
   sup{
     font-size: .6em;
+  }
+}
+
+// References list. Each reference must live in its own paragraph so every
+// entry can hang-indent below its number. Add the "references" class to the
+// blok that holds the list.
+.references{
+  // Long URLs must never overflow the column
+  overflow-wrap: anywhere;
+
+  // Only entry paragraphs carry the hanging indent (a bare heading
+  // paragraph like <strong>References</strong> stays flush left)
+  p:has(> span:first-child){
+    // Hanging indent: first line starts at the container edge, wrapped
+    // lines line up with the reference text after the number
+    padding-left: 35px;
+    text-indent: -35px;
+    margin-bottom: 0;
+  }
+
+  span{
+    // Fixed-width number column keeps the text start consistent
+    display: inline-block;
+    width: 33px;
+    text-indent: 0;
+    word-break: keep-all;
+  }
+}
+
+// Flip card: shows its front face (trigger) and flips to the back face
+// (tip) when clicked. Faces can be styled per blok through the
+// frontStyle/backStyle fields.
+.flip-card{
+  // Fill the parent column so every card in a row matches the tallest one
+  height: 100%;
+  perspective: 1200px;
+  cursor: pointer;
+
+  &:focus-visible{
+    outline: 2px solid #1F5F5B;
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+}
+
+.flip-card-inner{
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+}
+
+.flip-card.is-flipped .flip-card-inner{
+  transform: rotateY(180deg);
+}
+
+.flip-card-face{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 160px;
+  // Side and bottom padding keep the text clear of the corner trigger
+  padding: 24px 56px 48px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.08);
+  backface-visibility: hidden;
+  text-align: center;
+}
+
+.flip-card-front{
+  background: #F6D3B7;
+  color: #000;
+}
+
+.flip-card-back{
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  color: #000;
+  transform: rotateY(180deg);
+}
+
+// The uploaded icon asset is the complete round image; the wrapper only
+// adds the gap below it and never clips or resizes the picture.
+.flip-card-icon{
+  margin-bottom: 14px;
+
+  img{
+    display: block;
+  }
+}
+
+.flip-card-text{
+  color: #000;
+  text-align: center;
+  font-family: "new-hero", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.flip-card-trigger{
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  width: 36px;
+  height: 32px;
+
+  img{
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
