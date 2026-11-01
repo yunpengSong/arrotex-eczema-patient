@@ -27,11 +27,6 @@ import CardBox from "@/components/blocks/CardBox";
 import Link from "@/components/blocks/LinkComponent";
 import Button from "@/components/blocks/Button";
 import List from "@/components/blocks/List";
-import Login from "@/components/starter/Login";
-import Register from "@/components/starter/Register";
-import Feature from "@/components/starter/Feature";
-import Grid from "@/components/starter/Grid";
-import Teaser from "@/components/starter/Teaser";
 
 // Content version to fetch: development (local dev server / Visual Editor
 // preview) reads "draft", production builds read "published" so the live
@@ -45,8 +40,6 @@ export const getStoryblokApi = storyblokInit({
   use: [apiPlugin],
   components: {
     page: Page,
-    login: Login,
-    register: Register,
     header: Header,
     footer: Footer,
     banner: Banner,
@@ -73,9 +66,6 @@ export const getStoryblokApi = storyblokInit({
     link: Link,
     button: Button,
     list: List,
-    feature: Feature,
-    grid: Grid,
-    teaser: Teaser,
   },
   apiOptions: {
     /** Set the correct region for your space. Learn more: https://www.storyblok.com/docs/packages/storyblok-js#example-region-parameter */
