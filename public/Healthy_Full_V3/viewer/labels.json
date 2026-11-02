@@ -1,0 +1,53 @@
+[
+  {
+    "title": "What you feel",
+    "labels": [
+      {
+        "title": "Smooth skin",
+        "text": "Smooth skin and a strong barrier."
+      },
+      {
+        "title": "Lasting moisture",
+        "text": "Locked-in moisture — skin stays soft and hydrated."
+      },
+      {
+        "title": "Calm skin",
+        "text": "Calm, non-irritated skin — no redness or inflammation."
+      }
+    ]
+  },
+  {
+    "title": "What is happening within your skin",
+    "labels": [
+      {
+        "title": "Surface protection",
+        "text": "The surface barrier helps prevent the entry of pathogens, allergens or irritants."
+      },
+      {
+        "title": "Moisture retention",
+        "text": "Filaggrin is a protein that helps your skin retain moisture."
+      },
+      {
+        "title": "Immune defence",
+        "text": "A healthy immune system prevents infection or allergic skin reactions."
+      }
+    ]
+  },
+  {
+    "title": "Understanding your epidermis",
+    "labels": [
+      {
+        "title": "Stratum corneum",
+        "text": "Your surface barrier cells."
+      },
+      {
+        "title": "Stratum granulosum",
+        "text": "Your skin’s waterproofing layer."
+      },
+      {
+        "title": "Stratum spinosum",
+        "text": "Your skin’s scaffolding and immune barrier."
+      }
+    ]
+  }
+]
