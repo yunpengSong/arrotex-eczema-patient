@@ -698,9 +698,9 @@ ul {
 // built on native <details>/<summary>. The expanded area renders nested
 // bloks; title style can be overridden per blok through titleClass/titleStyle.
 .accordion{
-  border-bottom: 1px solid var(--gray-200, #D4DBDE);
-
   > summary{
+    // Separator sits under the title, not under the expanded content
+    border-bottom: 1px solid var(--gray-200, #D4DBDE);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1055,8 +1055,8 @@ ul {
   p:has(> span:first-child){
     // Hanging indent: first line starts at the container edge, wrapped
     // lines line up with the reference text after the number
-    padding-left: 35px;
-    text-indent: -35px;
+    padding-left: 37px;
+    text-indent: -37px;
     margin-bottom: 0;
   }
 
