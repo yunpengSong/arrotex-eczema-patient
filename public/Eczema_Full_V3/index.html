@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eczema Flare — 3D Macro</title>
+  <link rel="stylesheet" href="./viewer/style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+</head>
+<body>
+  <main id="viewer" aria-label="Interactive 3D skin model">
+    <canvas id="canvas" tabindex="0" aria-label="Skin model. Drag to rotate, scroll to zoom. Use buttons for preset views."></canvas>
+    <header><div class="brand">JHL DIGITAL <span>/</span> SKIN STUDY</div><h1>Eczema flare<span>in detail.</span></h1><p>An interactive 3D macro</p></header>
+    <div id="status" role="status" aria-live="polite"><span class="dot"></span><span id="status-text">Loading skin model…</span></div>
+    <svg id="label-lines" aria-hidden="true"></svg>
+    <aside id="annotations" hidden aria-label="Skin education labels">
+      <div class="section-kicker">EXPLORE THE EPIDERMIS</div>
+      <nav class="face-nav" aria-label="Choose cube face">
+        <button data-face="0" disabled>01 <span>Feel</span></button>
+        <button data-face="1" disabled>02 <span>Function</span></button>
+        <button data-face="2" disabled>03 <span>Layers</span></button>
+      </nav>
+      <h2 id="face-title"></h2>
+      <div id="label-cards"></div>
+      <p class="face-hint">Rotate the cube to discover each view.</p>
+    </aside>
+    <div class="lighting-control"><label for="lighting">Lighting</label><input id="lighting" type="range" min="40" max="120" step="5" value="65" aria-describedby="lighting-value"><output id="lighting-value" for="lighting">65%</output></div>
+    <div class="controls" role="group" aria-label="Viewer controls">
+      <button id="reset" disabled>Reset view</button><button id="top" disabled>Upper view</button>
+      <button id="rotate" aria-pressed="false" disabled>Auto rotate</button><span class="divider"></span>
+      <button id="zoom-in" aria-label="Zoom in" disabled>+</button><button id="zoom-out" aria-label="Zoom out" disabled>−</button>
+      <button id="labels-toggle" aria-pressed="true" disabled>Labels</button><button id="fullscreen" disabled>Full screen</button>
+    </div>
+    <footer><span>DRAG TO ROTATE · SCROLL TO ZOOM</span><span>02 / ECZEMA FLARE</span></footer>
+    <noscript>Enable JavaScript to view the 3D model.</noscript>
+  <p class="viewer-disclaimer" role="note">For illustrative purposes only.</p>
+</main>
+  
+  <script type="module">import('./viewer/app.js').catch(error=>{console.error(error);document.getElementById('status-text').textContent='Viewer could not start. Use START_PREVIEW.cmd, or serve this folder over HTTP.';document.getElementById('status').classList.add('error');});</script>
+<script src="./viewer/ui.js" defer></script>
+</body></html>

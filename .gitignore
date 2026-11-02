@@ -42,3 +42,7 @@ next-env.d.ts
 
 certificates
 dev.log
+
+# JHL 3D viewer source package (large, not for the repo)
+public/JHL Digital.zip
+public/JHL Digital/

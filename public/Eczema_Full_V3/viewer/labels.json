@@ -1,0 +1,49 @@
+[
+  {
+    "title": "What you feel",
+    "labels": [
+      {
+        "title": "Cracked / rough skin",
+        "text": "Cracked, rough skin."
+      },
+      {
+        "title": "Moisture loss",
+        "text": "Skin is dry and loses volume."
+      },
+      {
+        "title": "Inflammation",
+        "text": "Skin is red and itchy."
+      }
+    ]
+  },
+  {
+    "title": "What is happening within your skin",
+    "labels": [
+      {
+        "title": "Damaged surface barrier",
+        "text": "The surface barrier is damaged, allowing allergens, irritants, or bacteria / viruses to enter the skin."
+      },
+      {
+        "title": "Lower filaggrin",
+        "text": "Lower filaggrin means less natural moisturising factor."
+      }
+    ]
+  },
+  {
+    "title": "Understanding your epidermis",
+    "labels": [
+      {
+        "title": "Stratum corneum",
+        "text": "Your surface barrier cells."
+      },
+      {
+        "title": "Stratum granulosum",
+        "text": "Your skin’s waterproofing layer."
+      },
+      {
+        "title": "Stratum spinosum",
+        "text": "Your skin’s scaffolding and immune barrier."
+      }
+    ]
+  }
+]
