@@ -55,6 +55,10 @@ ul {
     }
   }
 }
+sup{
+  font-size: 55%;
+  top: -.8em;
+}
 .title {
   font-size: 30px;
   line-height: 35px;
@@ -1067,6 +1071,12 @@ ul {
     text-indent: 0;
     word-break: keep-all;
   }
+
+  // Links inherit the text color but keep an underline
+  a{
+    color: inherit;
+    text-decoration: underline;
+  }
 }
 
 // Flip card: shows its front face (trigger) and flips to the back face
@@ -1161,5 +1171,56 @@ ul {
     display: block;
     width: 100%;
     height: 100%;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile adjustments
+// ---------------------------------------------------------------------------
+
+// Collapsed navbar: labels stack vertically and left-align; the desktop
+// vertical separators become underlines between the items
+@media (max-width: 991.98px){
+  .navbar .navbar-nav .nav-item .nav-link{
+    text-align: left;
+    padding: .75rem 0;
+    border-right: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .navbar .navbar-nav .nav-item:last-child .nav-link{
+    border-bottom: none;
+  }
+}
+
+// Mobile hero title. The blok sets 60px/75px inline, so !important is
+// required to bring it down here.
+@media (max-width: 767.98px){
+  .banner-title{
+    font-size: 45px !important;
+    line-height: 55px !important;
+  }
+
+  // Carousel panel gets tighter padding on phones
+  .carousel{
+    padding: 15px;
+  }
+
+  // Slides stack: avatar on top, title and text below
+  .slide-card{
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .carousel .carousel-arrow{
+    width: 40px;
+    height: 40px;
+
+    svg{
+      width: 24px;
+      height: 24px;
+    }
   }
 }
