@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { connection } from "next/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import StoryblokProvider from "@/components/StoryblokProvider";
@@ -73,6 +74,11 @@ async function getHeaderBlok() {
 }
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // Cookiebot consent banner (Cookiebot dashboard -> "Your script" -> cbid).
+  // The banner only loads when the ID is configured, so the site keeps
+  // working before/without the CMP.
+  const cookiebotCbid = process.env.NEXT_PUBLIC_COOKIEBOT_CBID;
+
   const [hcpPopup, headerBlok] = await Promise.all([
     getHcpPopupProps(),
     getHeaderBlok(),
@@ -89,6 +95,16 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <link rel="preconnect" href="https://use.typekit.net" crossOrigin="anonymous" />
             <link rel="stylesheet" href="https://use.typekit.net/cus4qru.css" precedence="default" />
             <BootstrapClient />
+            {cookiebotCbid && (
+              <Script
+                id="cookiebot-uc"
+                src="https://consent.cookiebot.com/uc.js"
+                data-cbid={cookiebotCbid}
+                data-blockingmode="auto"
+                data-culture="EN"
+                strategy="beforeInteractive"
+              />
+            )}
             {headerBlok && <Header blok={headerBlok} />}
             {hcpPopup && <HcpPopup {...hcpPopup} />}
             {children}

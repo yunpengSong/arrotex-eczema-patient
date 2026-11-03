@@ -3,6 +3,20 @@
 import Link from "next/link";
 import { storyblokEditable, type SbBlokData } from "@storyblok/react/rsc";
 
+declare global {
+  interface Window {
+    Cookiebot?: {
+      renew: () => void;
+    };
+  }
+}
+
+// Reopen the Cookiebot consent dialog; a no-op when the CMP is not loaded
+const openCookiePreferences = (e: React.MouseEvent) => {
+  e.preventDefault();
+  window.Cookiebot?.renew();
+};
+
 export default function Footer({ blok }: { blok: SbBlokData }) {
   return (
     <footer {...storyblokEditable(blok)} className="footer bg-grey pb-4 pt-5">
@@ -18,7 +32,7 @@ export default function Footer({ blok }: { blok: SbBlokData }) {
               <Link href="#">Contact us</Link>
               <Link href="#">Terms of use</Link>
               <Link href="#">Privacy policy</Link>
-              <Link href="#">Cookie preferences</Link>
+              <a href="#" onClick={openCookiePreferences}>Cookie preferences</a>
             </div>
             <div className="footer-bottom-text pt-3">
               PRESCRIPTION-00573. Date of preparation October 2026<br />
