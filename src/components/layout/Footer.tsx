@@ -29,9 +29,9 @@ export default function Footer({ blok }: { blok: SbBlokData }) {
               You should report side effects to the Therapeutic Goods Administration (TGA) online at www.tga.gov.au/safety/reporting-problems.
             </div>
             <div className="footer-link pt-3">
-              <Link href="#">Contact us</Link>
+              <Link href="https://www.dbghealth.com.au/contact-us" target="_blank">Contact us</Link>
               <Link href="#">Terms of use</Link>
-              <Link href="#">Privacy policy</Link>
+              <Link href="https://www.dbghealth.com.au/privacy-policy" target="_blank">Privacy policy</Link>
               <a href="#" onClick={openCookiePreferences}>Cookie preferences</a>
             </div>
             <div className="footer-bottom-text pt-3">
