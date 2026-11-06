@@ -21,9 +21,16 @@ export default function HcpPopup({
   continueText = "Continue",
 }: HcpPopupProps) {
   const [open, setOpen] = useState(false);
+  // Target for the Continue button. null = the default continueUrl from
+  // Storyblok settings (HcpTrigger); a value = the clicked link's URL
+  // (.hcp-link class, see BootstrapClient).
+  const [url, setUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const onOpen = () => setOpen(true);
+    const onOpen = (e: Event) => {
+      setUrl((e as CustomEvent<{ url?: string }>).detail?.url ?? null);
+      setOpen(true);
+    };
     window.addEventListener("open-hcp-popup", onOpen);
     return () => window.removeEventListener("open-hcp-popup", onOpen);
   }, []);
@@ -70,7 +77,12 @@ export default function HcpPopup({
             </span>
             {cancelText}
           </button>
-          <a className="hcp-popup-btn" href={continueUrl}>
+          <a
+            className="hcp-popup-btn"
+            href={url ?? continueUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {continueText}
             <span className="hcp-popup-btn-icon">
               <svg viewBox="0 0 16 16" aria-hidden="true">

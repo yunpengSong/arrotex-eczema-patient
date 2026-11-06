@@ -21,8 +21,33 @@ export default function BootstrapClient() {
         anchor.rel = "noopener noreferrer";
       }
     };
+
+    // Any anchor marked .hcp-link (on the anchor or a descendant) opens
+    // the leaving-site popup (HcpPopup) instead of navigating; the popup's
+    // Continue button then goes to the link's URL.
+    const openHcpPopup = (event: MouseEvent) => {
+      const anchor = (event.target as HTMLElement).closest?.("a");
+      if (
+        anchor &&
+        anchor.getAttribute("href") &&
+        (anchor.classList.contains("hcp-link") ||
+          anchor.querySelector(".hcp-link"))
+      ) {
+        event.preventDefault();
+        window.dispatchEvent(
+          new CustomEvent("open-hcp-popup", {
+            detail: { url: anchor.href },
+          }),
+        );
+      }
+    };
+
     document.addEventListener("click", openInNewTab);
-    return () => document.removeEventListener("click", openInNewTab);
+    document.addEventListener("click", openHcpPopup);
+    return () => {
+      document.removeEventListener("click", openInNewTab);
+      document.removeEventListener("click", openHcpPopup);
+    };
   }, []);
 
   return null;

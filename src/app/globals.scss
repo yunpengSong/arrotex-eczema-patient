@@ -347,6 +347,16 @@ sup{
   background-position: top center;
 }
 
+// Fluid banner height, proportional to the viewport width: 772px at the
+// 1920px design width, capped at 772px on wider screens. The CMS sets a
+// min-height inline, so !important is required on >=768px (same approach
+// as the mobile .banner-title override); phones keep the CMS value.
+@media (min-width: 768px){
+  .banner{
+    min-height: min(40.21vw, 772px) !important; // 772 / 1920 * 100vw
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Split section: a two-column layout (text + media, media + text, or text +
 // text) composed in Storyblok from container/row/colx + text/image bloks.
